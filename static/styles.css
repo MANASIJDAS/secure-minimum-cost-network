@@ -1,0 +1,155 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #eaf3ff, #f5f9ff);
+  color: #17324d;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  margin-bottom: 10px;
+  font-size: 2.3rem;
+}
+
+.header p {
+  font-size: 1.05rem;
+  color: #425a75;
+}
+
+.content {
+  display: grid;
+  gap: 24px;
+}
+
+.panel {
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(34, 79, 124, 0.12);
+  padding: 24px;
+}
+
+.field-group {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+input,
+textarea,
+button {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #b9d0ea;
+  padding: 12px 14px;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 200px;
+  font-family: "Courier New", monospace;
+}
+
+button {
+  background: #1b5fc7;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background: #144ba0;
+}
+
+.hint {
+  margin: 12px 0 18px;
+  color: #49637f;
+  font-size: 0.94rem;
+}
+
+.error-box {
+  background: #ffe4e4;
+  border: 1px solid #f7bcbc;
+  border-radius: 12px;
+  color: #8c2323;
+  padding: 14px 16px;
+}
+
+.stats-grid,
+.tree-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.stat-card,
+.tree-box {
+  background: #f5f9ff;
+  border: 1px solid #dfeafc;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.label {
+  display: block;
+  color: #57718d;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tree-box h3 {
+  margin-top: 0;
+}
+
+.tree-box ul {
+  padding-left: 18px;
+  margin: 0 0 12px;
+}
+
+.analysis {
+  margin-top: 24px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+th,
+td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #dfeafc;
+}
+
+th {
+  background: #edf5ff;
+}
+
+@media (max-width: 640px) {
+  .header h1 {
+    font-size: 1.8rem;
+  }
+}

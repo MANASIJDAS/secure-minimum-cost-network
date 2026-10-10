@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimum-Cost Office Network Designer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Secure Minimum-Cost Computer Network Design</h1>
+        <p>Compare Prim's and Kruskal's MST algorithms to design the cheapest connected office network.</p>
+      </header>
+
+      <main class="content">
+        <section class="panel">
+          <h2>Input Network Data</h2>
+          <form method="POST">
+            <div class="field-group">
+              <label for="offices">Number of offices</label>
+              <input id="offices" name="offices" type="number" min="1" required value="6" />
+            </div>
+
+            <div class="field-group">
+              <label for="edges">Available links</label>
+              <textarea id="edges" name="edges" rows="12" required>1 2 10 50
+1 3 15 45
+2 3 5 80
+2 4 20 60
+3 4 8 35
+3 5 12 70
+4 5 6 90
+4 6 14 40
+5 6 9 55
+2 6 18 30</textarea>
+            </div>
+
+            <div class="hint">
+              Format: <strong>office1 office2 cost [bandwidth]</strong><br />
+              Example: <strong>1 2 10 50</strong>
+            </div>
+
+            <button type="submit">Compute Minimum-Cost Network</button>
+          </form>
+        </section>
+
+        {% if error %}
+        <div class="error-box">
+          <strong>Error:</strong> {{ error }}
+        </div>
+        {% endif %}
+
+        {% if result %}
+        <section class="panel results">
+          <h2>Minimum Spanning Tree Results</h2>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="label">Vertices</span>
+              <strong>{{ result.vertices }}</strong>
+            </div>
+            <div class="stat-card">
+              <span class="label">Edges</span>
+              <strong>{{ result.edges }}</strong>
+            </div>
+            <div class="stat-card">
+              <span class="label">Prim total cost</span>
+              <strong>{{ '%.2f' % result.prim_total }}</strong>
+            </div>
+            <div class="stat-card">
+              <span class="label">Kruskal total cost</span>
+              <strong>{{ '%.2f' % result.kruskal_total }}</strong>
+            </div>
+          </div>
+
+          <div class="tree-grid">
+            <div class="tree-box">
+              <h3>Prim's MST</h3>
+              <ul>
+                {% for u, v, w in result.prim_edges %}
+                <li>{{ u }} - {{ v }} | Cost: {{ '%.2f' % w }}</li>
+                {% endfor %}
+              </ul>
+              <p><strong>Time:</strong> {{ result.prim_time_ms }} ms</p>
+              <p><strong>Operations:</strong> {{ result.prim_operations }}</p>
+            </div>
+
+            <div class="tree-box">
+              <h3>Kruskal's MST</h3>
+              <ul>
+                {% for u, v, w in result.kruskal_edges %}
+                <li>{{ u }} - {{ v }} | Cost: {{ '%.2f' % w }}</li>
+                {% endfor %}
+              </ul>
+              <p><strong>Time:</strong> {{ result.kruskal_time_ms }} ms</p>
+              <p><strong>Operations:</strong> {{ result.kruskal_operations }}</p>
+            </div>
+          </div>
+
+          <div class="analysis">
+            <h3>Algorithm Analysis</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Factor</th>
+                  <th>Prim's</th>
+                  <th>Kruskal's</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Vertices</td>
+                  <td>{{ result.vertices }}</td>
+                  <td>{{ result.vertices }}</td>
+                </tr>
+                <tr>
+                  <td>Edges</td>
+                  <td>{{ result.edges }}</td>
+                  <td>{{ result.edges }}</td>
+                </tr>
+                <tr>
+                  <td>Execution time</td>
+                  <td>{{ result.prim_time_ms }} ms</td>
+                  <td>{{ result.kruskal_time_ms }} ms</td>
+                </tr>
+                <tr>
+                  <td>Operations</td>
+                  <td>{{ result.prim_operations }}</td>
+                  <td>{{ result.kruskal_operations }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        {% endif %}
+      </main>
+    </div>
+  </body>
+</html>
